@@ -7,98 +7,49 @@ function adm($db, $hos_id){
   $sd = "2013-07-01";
 	$ed = date('Y-m-d');
 
-	$strSQL = "SELECT count(*) FROM tb_inddata where (dateadm between '" .$sd. "' and '".$ed."') and hos_id = '$hos_id' and status <> 0 GROUP BY hn ";
+	$strSQL = "SELECT count(*) as summ1 FROM tb_inddata where (dateadm between '" .$sd. "' and '".$ed."') and hos_id = '$hos_id' and status <> 0 ";
 	$result = $db->select($strSQL,false,true);
 
-	$strSQL = "SELECT count(*) as a FROM tb_inddata where dadel between '" .$sd. "' and '".$ed."' and hos_id = '$hos_id' and status <> 0 GROUP BY hn ";
+	$strSQL = "SELECT count(*) as summ2 FROM tb_inddata where dadel between '" .$sd. "' and '".$ed."' and hos_id = '$hos_id' and status <> 0 ";
 	$result2 = $db->select($strSQL,false,true);
 
-  if($result){
-    // print "<a href=\"../admin/result.php?id=1&hos=$hos_id\" class=\"wlink\" >".sizeof($result)."</a>";
-    if(sizeof($result) >= sizeof($result2)){
-  		print "<a href=\"../admin/result.php?id=1&hos=$hos_id\" class=\"wlink\" >".sizeof($result)."</a>";
+  $sum = 0;
+  if(($result) && ($result2)){
+    if($result[0]['summ1'] >= $result2[0]['summ2']){
+      $sum = $result[0]['summ1'];
   	}else{
-      // print "N" ;
-      // print "<a href=\"../admin/result.php?id=1&hos=$hos_id\" class=\"wlink\" >".sizeof($result)."</a> | ";
-  		print "<a href=\"../admin/result.php?id=1&hos=$hos_id\" class=\"wlink\" >".sizeof($result2)."</a>";
+      $sum = $result2[0]['summ2'];
   	}
   }else{
-    print "0";
+    if($result){
+      $sum = $result[0]['summ1'];
+    }else{
+      $sum = $result2[0]['summ2'];
+    }
   }
-
-}
-
-function adm2($db, $hos_id){
-
-  $sd = "2013-07-01";
-	$ed = date('Y-m-d');
-
-	$strSQL = "SELECT count(*) FROM tb_inddata where (dateadm between '" .$sd. "' and '".$ed."') and hos_id = '$hos_id' and status <> 0 GROUP BY hn ";
-	$result = $db->select($strSQL,false,true);
-
-	$strSQL = "SELECT count(*) as a FROM tb_inddata where dadel between '" .$sd. "' and '".$ed."' and hos_id = '$hos_id' and status <> 0 GROUP BY hn ";
-	$result2 = $db->select($strSQL,false,true);
-
-  if($result){
-    // print "<a href=\"../admin/result.php?id=1&hos=$hos_id\" class=\"wlink\" >".sizeof($result)."</a>";
-    if(sizeof($result) >= sizeof($result2)){
-  		// print "<a href=\"../admin/result.php?id=1&hos=$hos_id\" class=\"wlink\" >".sizeof($result)."</a>";
-      return sizeof($result);
-  	}else{
-      // print "N";
-  		// print "<a href=\"../admin/result.php?id=1&hos=$hos_id\" class=\"wlink\" >".sizeof($result2)."</a>";
-      return sizeof($result2);
-  	}
-  }else{
-    // print "0";
-    return 0;
-  }
-
+  return $sum;
 }
 
 function del($db, $hos_id){
   $sd = "2013-07-01";
 	$ed = date('Y-m-d');
-	$strSQL = "SELECT count(*) as a FROM tb_inddata where dadel between '" .$sd. "' and '".$ed."' and hos_id = '$hos_id' and status <> 0 GROUP BY hn ";
+	$strSQL = "SELECT count(*) as summ1 FROM tb_inddata where dadel between '" .$sd. "' and '".$ed."' and hos_id = '$hos_id' and status <> 0 ";
 	$result = $db->select($strSQL,false,true);
   if($result){
-    print "<a href=\"../admin/result.php?id=1&hos=$hos_id\" class=\"wlink\" >".sizeof($result)."</a>";
+    return $result[0]['summ1'];
   }else{
-    print "0";
+    return 0;
   }
 }
 
-function del2($db, $hos_id){
-  $sd = "2013-07-01";
-	$ed = date('Y-m-d');
-	$strSQL = "SELECT count(*) as a FROM tb_inddata where dadel between '" .$sd. "' and '".$ed."' and hos_id = '$hos_id' and status <> 0 GROUP BY hn ";
-	$result = $db->select($strSQL,false,true);
-  if($result){
-    return sizeof($result);
-  }else{
-    return sizeof(0);
-  }
-}
 
 function birth($db, $hos_id){
   $sd = "2013-07-01";
 	$ed = date('Y-m-d');
-  $strSQL = "SELECT count(*) FROM tb_newborn_charector where indData_id in (select ind_id from tb_inddata where dadel between '$sd' and '$ed' and hos_id = '$hos_id') or indData_id in (select ind_id from tb_inddata where dateadm between '$sd' and '$ed' and hos_id = '$hos_id')";
+  $strSQL = "SELECT count(*) as summ1 FROM tb_newborn_charector where indData_id in (select ind_id from tb_inddata where dadel between '$sd' and '$ed' and hos_id = '$hos_id' and status <> 0) or indData_id in (select ind_id from tb_inddata where dateadm between '$sd' and '$ed' and hos_id = '$hos_id' and status <> 0)";
 	$result = $db->select($strSQL,false,true);
   if($result){
-    print "<a href=\"../admin/result.php?id=2&hos=$hos_id\" class=\"wlink\" >".$result[0]['count(*)']."</a>";
-  }else{
-    print "0";
-  }
-}
-
-function birth2($db, $hos_id){
-  $sd = "2013-07-01";
-	$ed = date('Y-m-d');
-  $strSQL = "SELECT count(*) FROM tb_newborn_charector where indData_id in (select ind_id from tb_inddata where dadel between '$sd' and '$ed' and hos_id = '$hos_id') or indData_id in (select ind_id from tb_inddata where dateadm between '$sd' and '$ed' and hos_id = '$hos_id')";
-	$result = $db->select($strSQL,false,true);
-  if($result){
-    return $result[0]['count(*)'];
+    return $result[0]['summ1'];
   }else{
     return 0;
   }
@@ -107,24 +58,11 @@ function birth2($db, $hos_id){
 function lbirth($db, $hos_id){
   $sd = "2013-07-01";
 	$ed = date('Y-m-d');
-  $strSQL = "SELECT count(*) FROM tb_newborn_charector where indData_id in (select ind_id from tb_inddata where dadel between '$sd' and '$ed' and hos_id = '$hos_id' ) and sov = 1";
+  $strSQL = "SELECT count(*) as summ1 FROM tb_newborn_charector where indData_id in (select ind_id from tb_inddata where dadel between '$sd' and '$ed' and hos_id = '$hos_id'  and status <> 0 ) and sov = 1";
 	$result = $db->select($strSQL,false,true);
 
   if($result){
-    print "<a href=\"../admin/result.php?id=3&hos=$hos_id\" class=\"wlink\" >".$result[0]['count(*)']."</a>";
-  }else{
-    print "0";
-  }
-}
-
-function lbirth2($db, $hos_id){
-  $sd = "2013-07-01";
-	$ed = date('Y-m-d');
-  $strSQL = "SELECT count(*) FROM tb_newborn_charector where indData_id in (select ind_id from tb_inddata where dadel between '$sd' and '$ed' and hos_id = '$hos_id' ) and sov = 1";
-	$result = $db->select($strSQL,false,true);
-
-  if($result){
-    return $result[0]['count(*)'];
+    return $result[0]['summ1'];
   }else{
     return 0;
   }
@@ -132,29 +70,29 @@ function lbirth2($db, $hos_id){
 
 function referin($db, $hos_id){
 
-  $strSQL = "SELECT count(*) FROM tb_inddata where hos_id = '$hos_id' and refer != 0 and refer_f != '' and status != 0";
+  $strSQL = "SELECT count(*) as summ1 FROM tb_inddata where hos_id = '$hos_id' and refer != 0 and refer_f != '' and status <> 0";
 	$result = $db->select($strSQL,false,true);
 
   if($result){
-    print "<a href=\"../admin/result.php?id=4&hos=$hos_id\" class=\"wlink\" >".$result[0]['count(*)']."</a>";
+    return $result[0]['summ1'];
   }else{
-    print "0";
+    return 0;
   }
 }
 
 function referout($db, $hos_id){
-  $strSQL = "SELECT count(*) FROM tb_inddata where hos_id = '$hos_id' and refer != 0 and refer_t != '' and status != 0";
+  $strSQL = "SELECT count(*) as summ1  FROM tb_inddata where hos_id = '$hos_id' and refer != 0 and refer_t != '' and status <> 0";
   $result = $db->select($strSQL,false,true);
   if($result){
-    print "<a href=\"../admin/result.php?id=4&hos=$hos_id\" class=\"wlink\" >".$result[0]['count(*)']."</a>";
+    return $result[0]['summ1'];
   }else{
-    print "0";
+    return 0;
   }
 }
 
 function getRefer($db, $refer){
   if($refer=='in'){
-    $strSQL = "SELECT count(*) FROM tb_inddata where hos_id != '0' and refer != 0 and refer_f != '' and status != 0";
+    $strSQL = "SELECT count(*) FROM tb_inddata where hos_id != '0' and refer != 0 and refer_f != '' and status <> 0";
   	$result = $db->select($strSQL,false,true);
 
     if($result){
@@ -163,7 +101,7 @@ function getRefer($db, $refer){
       print "0";
     }
   }else{
-    $strSQL = "SELECT count(*) FROM tb_inddata where hos_id != '0' and refer != 0 and refer_t != '' and status != 0";
+    $strSQL = "SELECT count(*) FROM tb_inddata where hos_id != '0' and refer != 0 and refer_t != '' and status <> 0";
     $result = $db->select($strSQL,false,true);
     if($result){
       print "<a href=# class=\"wlink\" >".$result[0]['count(*)']."</a>";
@@ -183,7 +121,7 @@ function complication($db, $hos_id, $com_id){
   }
 }
 
-function countcase($db, $hos_id,$ind_no){
+function countcase($db, $hos_id, $ind_no){
 	$sd = "2013-07-01";
 	$ed = date('Y-m-d');
 
@@ -193,7 +131,7 @@ function countcase($db, $hos_id,$ind_no){
 	//$strSQL = "SELECT count(*) FROM tb_indicator".$ind_no." where ind_id in (select ind_id from tb_inddata where dateent between '2013-07-01' and '2013-12-31' and hos_id = '$hos_id')";
 	$result = $db->select($strSQL,false,true);
 	if($result[0]['a']!=0){
-		print "<a href=\"../admin/result.php?id=5&hos=$hos_id&ind_id=$ind_no\" class=\"wlink\" >".$result[0]['a']."</a>";
+		print "<a href=result.php?hos=$hos_id class=\"wlink\" >".$result[0]['a']."</a>";
 	}else{
 		print "-";
 	}
@@ -215,75 +153,86 @@ function countcase2($db, $hos_id,$ind_no){
 	}
 }
 
+function summary($db, $choice){
+  $sd = "2013-07-01";
+	$ed = date('Y-m-d');
+
+  $strSQL = "SELECT hos_id FROM tb_hospital WHERE status = 1";
+  $resultHos = $db->select($strSQL,false,true);
+
+  if($resultHos){
+    switch($choice){
+      case 1: $summ = 0;
+              foreach($resultHos as $val){
+                $strSQL = "SELECT count(*) as summ1 FROM tb_inddata a inner join tb_hospital b on a.hos_id=b.hos_id where a.dateadm between '" .$sd. "' and '".$ed."' and b.status = 1 and b.hos_id = '".$val['hos_id']."' and a.status <> 0";
+                $result = $db->select($strSQL,false,true);
+
+                $strSQL = "SELECT count(*) as summ2 FROM tb_inddata a inner join tb_hospital b on a.hos_id=b.hos_id where a.dadel between '" .$sd. "' and '".$ed."' and  b.status = 1 and b.hos_id = '".$val['hos_id']."' and a.status <> 0 ";
+                $result2 = $db->select($strSQL,false,true);
+
+                if(($result) && ($result2)){
+                  if($result[0]['summ1'] >= $result2[0]['summ2']){
+                    $summ += $result[0]['summ1'];
+                    //print $result[0]['summ1']." 1<br>";
+                	}else{
+                    //print $result2[0]['summ2']." 2<br>";
+                    $summ += $result2[0]['summ2'];
+                	}
+                }else{
+                  if($result){
+                    //print $result[0]['summ1']." 1<br>";
+                    $summ += $result[0]['summ1'];
+                  }else{
+                    //print $result2[0]['summ2']." 2<br>";
+                    $summ += $result2[0]['summ2'];
+                  }
+                }
+              }
+              return $summ;
+              break;
+      case 2: $summ = 0;
+              foreach($resultHos as $val){
+                $strSQL = "SELECT count(*) as summ1 FROM tb_inddata where dadel between '" .$sd. "' and '".$ed."' and hos_id = '".$val['hos_id']."' and status <> 0 ";
+              	$result = $db->select($strSQL,false,true);
+                if($result){
+                  $summ += $result[0]['summ1'];
+                }
+              }
+
+              return $summ;
+              break;
+      case 3: $summ = 0;
+              foreach($resultHos as $val){
+                $strSQL = "SELECT count(*) as summ1 FROM tb_newborn_charector where indData_id in (select ind_id from tb_inddata where dadel between '$sd' and '$ed' and hos_id = '".$val['hos_id']."' and status <> 0) or indData_id in (select ind_id from tb_inddata where dateadm between '$sd' and '$ed' and hos_id = '".$val['hos_id']."' and status <> 0)";
+                $result = $db->select($strSQL,false,true);
+                if($result[0]['summ1']!=0){
+                  $summ += $result[0]['summ1'];
+                }
+              }
+              return $summ;
+              break;
+      case 4: $summ = 0;
+              foreach($resultHos as $val){
+                $strSQL = "SELECT count(*) as summ1 FROM tb_newborn_charector where indData_id in (select ind_id from tb_inddata where dadel between '$sd' and '$ed' and hos_id = '".$val['hos_id']."'  and status <> 0 ) and sov = 1";
+                $result = $db->select($strSQL,false,true);
+                if($result[0]['summ1']!=0){
+                  $summ += $result[0]['summ1'];
+                }
+              }
+              return $summ;
+              break;
+
+    }
+  }
+}
+
 function countaTotal($db, $part, $choice){
 
 	$sd = "2013-07-01";
 	$ed = date('Y-m-d');
 	if($part==0){
-		if($choice==1){
-			// // $strSQL = "SELECT count(*) FROM tb_inddata where (dateadm between '" .$sd. "' and '".$ed."') and hos_id <> 0";
-      // $strSQL = "SELECT count(*) FROM tb_inddata where (dateadm between '" .$sd. "' and '".$ed."') and hos_id <> 0 GROUP BY hn ";
-    	// $result = $db->select($strSQL,false,true);
-      //
-    	// $strSQL = "SELECT count(*) as a FROM tb_inddata where dadel between '" .$sd. "' and '".$ed."' and hos_id <> 0 GROUP BY hn ";
-    	// $result2 = $db->select($strSQL,false,true);
-      //
-      // if($result){
-      //   // print "<a href=\"../admin/result.php?id=1&hos=$hos_id\" class=\"wlink\" >".sizeof($result)."</a>";
-      //   if(sizeof($result) >= sizeof($result2)){
-      // 		print "<a href=\"#\" class=\"wlink\" >".sizeof($result)."</a>";
-      // 	}else{
-      //     // print "N";
-      // 		print "<a href=\"#\" class=\"wlink\" >".sizeof($result2)."</a>";
-      // 	}
-      // }else{
-      //   print "0";
-      // }
-
-      $strSQL = "SELECT count(*) as valNo FROM tb_inddata where (dateadm between '" .$sd. "' and '".$ed."') and hos_id <> 0 and status <> 0 ";
-    	$result = $db->select($strSQL,false,true);
-
-      if($result){
-        print $result[0]['valNo'];
-      }else{
-        print "0";
-      }
-
-		}else if($choice==2){
-			$strSQL = "SELECT count(*) FROM tb_inddata where dadel between '2013-07-01' and '".date('Y-m-d')."'";
-      $result = $db->select($strSQL,false,true);
-    	if($result[0]['count(*)']!=0){
-    		print "<a href=\"#\" class=\"wlink\">".$result[0]['count(*)']."</a>";
-    	}else{
-    		print "-";
-    	}
-		}else if($choice==3){
-			$strSQL = "SELECT count(*) FROM tb_newborn_charector where indData_id in (select ind_id from tb_inddata where dadel between '2013-07-01' and '".date('Y-m-d')."') or indData_id in (select ind_id from tb_inddata where dateadm between '2013-07-01' and '".date('Y-m-d')."')";
-      $result = $db->select($strSQL,false,true);
-    	if($result[0]['count(*)']!=0){
-    		print "<a href=\"#\" class=\"wlink\">".$result[0]['count(*)']."</a>";
-    	}else{
-    		print "-";
-    	}
-		}else if($choice==4){
-			$strSQL = "SELECT count(*) FROM tb_newborn_charector where indData_id in (select ind_id from tb_inddata where dadel between '2013-07-01' and '".date('Y-m-d')."' ) and sov = 1";
-      $result = $db->select($strSQL,false,true);
-    	if($result[0]['count(*)']!=0){
-    		print "<a href=\"#\" class=\"wlink\">".$result[0]['count(*)']."</a>";
-    	}else{
-    		print "-";
-    	}
-		}else if($choice==5){
-			$strSQL = "SELECT count(*) FROM tb_newborn_charector where indData_id in (select ind_id from tb_inddata where dadel between '2013-07-01' and '".date('Y-m-d')."' ) and sov = 1";
-      $result = $db->select($strSQL,false,true);
-    	if($result[0]['count(*)']!=0){
-    		print "<a href=\"#\" class=\"wlink\">".$result[0]['count(*)']."</a>";
-    	}else{
-    		print "-";
-    	}
-		}
-
-
+		// Do nothing
+    // Look on function named "summary"
 	}else if($part==1){
 		// $strSQL = "SELECT count(*) FROM tb_indicator".$choice." where ind_id in (select ind_id from tb_inddata where dateent between '$sd' and '$ed')";
     $strSQL = "SELECT count(tb_inddata.ind_id) as a FROM tb_indicator".$choice." inner join tb_inddata on tb_indicator".$choice.".ind_id=tb_inddata.ind_id
@@ -291,7 +240,7 @@ function countaTotal($db, $part, $choice){
 
     $result = $db->select($strSQL,false,true);
   	if($result[0]['a']!=0){
-  		print "<a href=\"#\" class=\"wlink\">".$result[0]['a']."</a>";
+  		print "<strong><a href=result_all.php class=\"wlink\">".$result[0]['a']."</a></strong>";
   	}else{
   		print "-";
   	}

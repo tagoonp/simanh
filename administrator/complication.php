@@ -389,7 +389,7 @@ $comArr = array('Severe Preeclampsia/Eclampsia','Postpartum hemorrhage','Sepsis'
                               foreach($resultHospital as $value){
                                 ?>
                                 <td>
-                                  <?php del($db, $value['hos_id']); ?>
+                                  <?php print del($db, $value['hos_id']); ?>
                                 </td>
                                 <?php
                               }
@@ -397,7 +397,7 @@ $comArr = array('Severe Preeclampsia/Eclampsia','Postpartum hemorrhage','Sepsis'
                             ?>
                           </tr>
                           <tr>
-                            <td style="text-align: right;">
+                            <td style="text-align: right; vertical-align: text-top;" valign="top">
                               Percentage (%)
                             </td>
                             <?php
@@ -407,7 +407,7 @@ $comArr = array('Severe Preeclampsia/Eclampsia','Postpartum hemorrhage','Sepsis'
                                 <td>
                                   <?php
                                     $a = countcase2($db, $value['hos_id'], 1);
-                                    $b = del2($db, $value['hos_id']);
+                                    $b = del($db, $value['hos_id']);
 		                                calcaseComplication(intval($a),intval($b));?>
                                 </td>
                                 <?php
@@ -445,7 +445,7 @@ $comArr = array('Severe Preeclampsia/Eclampsia','Postpartum hemorrhage','Sepsis'
                               foreach($resultHospital as $value){
                                 ?>
                                 <td>
-                                  <?php del($db, $value['hos_id']); ?>
+                                  <?php print del($db, $value['hos_id']); ?>
                                 </td>
                                 <?php
                               }
@@ -453,7 +453,7 @@ $comArr = array('Severe Preeclampsia/Eclampsia','Postpartum hemorrhage','Sepsis'
                             ?>
                           </tr>
                           <tr>
-                            <td style="text-align: right;">
+                            <td style="text-align: right; vertical-align: text-top;" valign="top">
                               Percentage (%)
                             </td>
                             <?php
@@ -463,7 +463,7 @@ $comArr = array('Severe Preeclampsia/Eclampsia','Postpartum hemorrhage','Sepsis'
                                 <td>
                                   <?php
                                     $a = countcase2($db, $value['hos_id'], 2);
-                                    $b = del2($db, $value['hos_id']);
+                                    $b = del($db, $value['hos_id']);
 		                                calcaseComplication(intval($a),intval($b));?>
                                 </td>
                                 <?php
@@ -501,7 +501,7 @@ $comArr = array('Severe Preeclampsia/Eclampsia','Postpartum hemorrhage','Sepsis'
                               foreach($resultHospital as $value){
                                 ?>
                                 <td>
-                                  <?php del($db, $value['hos_id']); ?>
+                                  <?php print del($db, $value['hos_id']); ?>
                                 </td>
                                 <?php
                               }
@@ -509,7 +509,7 @@ $comArr = array('Severe Preeclampsia/Eclampsia','Postpartum hemorrhage','Sepsis'
                             ?>
                           </tr>
                           <tr>
-                            <td style="text-align: right;">
+                            <td style="text-align: right; vertical-align: text-top;" valign="top">
                               Percentage (%)
                             </td>
                             <?php
@@ -519,7 +519,7 @@ $comArr = array('Severe Preeclampsia/Eclampsia','Postpartum hemorrhage','Sepsis'
                                 <td>
                                   <?php
                                     $a = countcase2($db, $value['hos_id'], 3);
-                                    $b = del2($db, $value['hos_id']);
+                                    $b = del($db, $value['hos_id']);
 		                                calcaseComplication(intval($a),intval($b));?>
                                 </td>
                                 <?php
@@ -557,7 +557,7 @@ $comArr = array('Severe Preeclampsia/Eclampsia','Postpartum hemorrhage','Sepsis'
                               foreach($resultHospital as $value){
                                 ?>
                                 <td>
-                                  <?php del($db, $value['hos_id']); ?>
+                                  <?php print del($db, $value['hos_id']); ?>
                                 </td>
                                 <?php
                               }
@@ -565,7 +565,7 @@ $comArr = array('Severe Preeclampsia/Eclampsia','Postpartum hemorrhage','Sepsis'
                             ?>
                           </tr>
                           <tr>
-                            <td style="text-align: right;">
+                            <td style="text-align: right; vertical-align: text-top;" valign="top">
                               Percentage (%)
                             </td>
                             <?php
@@ -575,7 +575,7 @@ $comArr = array('Severe Preeclampsia/Eclampsia','Postpartum hemorrhage','Sepsis'
                                 <td>
                                   <?php
                                     $a = countcase2($db, $value['hos_id'], 4);
-                                    $b = del2($db, $value['hos_id']);
+                                    $b = del($db, $value['hos_id']);
 		                                calcaseComplication(intval($a),intval($b));?>
                                 </td>
                                 <?php
@@ -613,7 +613,7 @@ $comArr = array('Severe Preeclampsia/Eclampsia','Postpartum hemorrhage','Sepsis'
                               foreach($resultHospital as $value){
                                 ?>
                                 <td>
-                                  <?php del($db, $value['hos_id']); ?>
+                                  <?php print del($db, $value['hos_id']); ?>
                                 </td>
                                 <?php
                               }
@@ -621,7 +621,7 @@ $comArr = array('Severe Preeclampsia/Eclampsia','Postpartum hemorrhage','Sepsis'
                             ?>
                           </tr>
                           <tr>
-                            <td style="text-align: right;">
+                            <td style="text-align: right; vertical-align: text-top;" valign="top">
                               Percentage (%)
                             </td>
                             <?php
@@ -631,7 +631,7 @@ $comArr = array('Severe Preeclampsia/Eclampsia','Postpartum hemorrhage','Sepsis'
                                 <td>
                                   <?php
                                     $a = countcase2($db, $value['hos_id'], 5);
-                                    $b = del2($db, $value['hos_id']);
+                                    $b = del($db, $value['hos_id']);
 		                                calcaseComplication(intval($a),intval($b));?>
                                 </td>
                                 <?php
@@ -669,7 +669,7 @@ $comArr = array('Severe Preeclampsia/Eclampsia','Postpartum hemorrhage','Sepsis'
                               foreach($resultHospital as $value){
                                 ?>
                                 <td>
-                                  <?php lbirth($db, $value['hos_id']); ?>
+                                  <?php print lbirth($db, $value['hos_id']); ?>
                                 </td>
                                 <?php
                               }
@@ -677,7 +677,7 @@ $comArr = array('Severe Preeclampsia/Eclampsia','Postpartum hemorrhage','Sepsis'
                             ?>
                           </tr>
                           <tr>
-                            <td style="text-align: right;">
+                            <td style="text-align: right; vertical-align: text-top;" valign="top">
                               Percentage (%)
                             </td>
                             <?php
@@ -687,7 +687,7 @@ $comArr = array('Severe Preeclampsia/Eclampsia','Postpartum hemorrhage','Sepsis'
                                 <td>
                                   <?php
                                     $a = countcase2($db, $value['hos_id'], 6);
-                                    $b = lbirth2($db, $value['hos_id']);
+                                    $b = lbirth($db, $value['hos_id']);
 		                                calcaseComplication2(intval($a),intval($b));?>
                                 </td>
                                 <?php
@@ -725,7 +725,7 @@ $comArr = array('Severe Preeclampsia/Eclampsia','Postpartum hemorrhage','Sepsis'
                               foreach($resultHospital as $value){
                                 ?>
                                 <td>
-                                  <?php birth($db, $value['hos_id']); ?>
+                                  <?php print birth($db, $value['hos_id']); ?>
                                 </td>
                                 <?php
                               }
@@ -733,7 +733,7 @@ $comArr = array('Severe Preeclampsia/Eclampsia','Postpartum hemorrhage','Sepsis'
                             ?>
                           </tr>
                           <tr>
-                            <td style="text-align: right;">
+                            <td style="text-align: right; vertical-align: text-top;" valign="top">
                               Percentage (%)
                             </td>
                             <?php
@@ -743,7 +743,7 @@ $comArr = array('Severe Preeclampsia/Eclampsia','Postpartum hemorrhage','Sepsis'
                                 <td>
                                   <?php
                                     $a = countcase2($db, $value['hos_id'], 7);
-                                    $b = birth2($db, $value['hos_id']);
+                                    $b = birth($db, $value['hos_id']);
 		                                calcaseComplication(intval($a),intval($b));?>
                                 </td>
                                 <?php
@@ -781,7 +781,7 @@ $comArr = array('Severe Preeclampsia/Eclampsia','Postpartum hemorrhage','Sepsis'
                               foreach($resultHospital as $value){
                                 ?>
                                 <td>
-                                  <?php lbirth($db, $value['hos_id']); ?>
+                                  <?php print lbirth($db, $value['hos_id']); ?>
                                 </td>
                                 <?php
                               }
@@ -789,7 +789,7 @@ $comArr = array('Severe Preeclampsia/Eclampsia','Postpartum hemorrhage','Sepsis'
                             ?>
                           </tr>
                           <tr>
-                            <td style="text-align: right;">
+                            <td style="text-align: right; vertical-align: text-top;" valign="top">
                               Percentage (%)
                             </td>
                             <?php
@@ -799,7 +799,7 @@ $comArr = array('Severe Preeclampsia/Eclampsia','Postpartum hemorrhage','Sepsis'
                                 <td>
                                   <?php
                                     $a = countcase2($db, $value['hos_id'], 8);
-                                    $b = lbirth2($db, $value['hos_id']);
+                                    $b = lbirth($db, $value['hos_id']);
 		                                calcaseComplication(intval($a),intval($b));?>
                                 </td>
                                 <?php
@@ -837,7 +837,7 @@ $comArr = array('Severe Preeclampsia/Eclampsia','Postpartum hemorrhage','Sepsis'
                               foreach($resultHospital as $value){
                                 ?>
                                 <td>
-                                  <?php birth($db, $value['hos_id']); ?>
+                                  <?php print birth($db, $value['hos_id']); ?>
                                 </td>
                                 <?php
                               }
@@ -845,7 +845,7 @@ $comArr = array('Severe Preeclampsia/Eclampsia','Postpartum hemorrhage','Sepsis'
                             ?>
                           </tr>
                           <tr>
-                            <td style="text-align: right;">
+                            <td style="text-align: right; vertical-align: text-top;" valign="top">
                               Percentage (%)
                             </td>
                             <?php
@@ -855,7 +855,7 @@ $comArr = array('Severe Preeclampsia/Eclampsia','Postpartum hemorrhage','Sepsis'
                                 <td>
                                   <?php
                                     $a = countcase2($db, $value['hos_id'], 9);
-                                    $b = birth2($db, $value['hos_id']);
+                                    $b = birth($db, $value['hos_id']);
 		                                calcaseComplication3(intval($a),intval($b));?>
                                 </td>
                                 <?php
@@ -893,7 +893,7 @@ $comArr = array('Severe Preeclampsia/Eclampsia','Postpartum hemorrhage','Sepsis'
                               foreach($resultHospital as $value){
                                 ?>
                                 <td>
-                                  <?php lbirth($db, $value['hos_id']); ?>
+                                  <?php print lbirth($db, $value['hos_id']); ?>
                                 </td>
                                 <?php
                               }
@@ -901,7 +901,7 @@ $comArr = array('Severe Preeclampsia/Eclampsia','Postpartum hemorrhage','Sepsis'
                             ?>
                           </tr>
                           <tr>
-                            <td style="text-align: right;">
+                            <td style="text-align: right; vertical-align: text-top;" valign="top">
                               Percentage (%)
                             </td>
                             <?php
@@ -911,7 +911,7 @@ $comArr = array('Severe Preeclampsia/Eclampsia','Postpartum hemorrhage','Sepsis'
                                 <td>
                                   <?php
                                     $a = countcase2($db, $value['hos_id'], 10);
-                                    $b = lbirth2($db, $value['hos_id']);
+                                    $b = lbirth($db, $value['hos_id']);
 		                                calcaseComplication3(intval($a),intval($b));?>
                                 </td>
                                 <?php

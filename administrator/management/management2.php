@@ -45,8 +45,13 @@ $resultHospital = $db->select($strSQL,false,true);
   </thead>
   <tbody>
     <tr>
+      <td colspan="<?php print sizeof($resultHospital)+100; ?>" style="text-align: left; background: #f3f3f3;">
+        <strong>General Mangement</strong>
+      </td>
+    </tr>
+    <tr>
       <td style="text-align: left;">
-        1. MgSo4 administration after diagnosis
+        1. IV fluid administration with Normal Saline or Lactate Ringer
       </td>
       <?php
       if($resultHospital){
@@ -65,7 +70,113 @@ $resultHospital = $db->select($strSQL,false,true);
     </tr>
     <tr>
       <td style="text-align: left;">
-        2. Maternal monitoring after MgSo4 administration
+        2. Monitoring V/S every 15 minutes
+      </td>
+      <?php
+      if($resultHospital){
+        foreach($resultHospital as $value){
+          ?>
+          <td class="col_<?php print $value['hos_id'];?>">
+            -
+          </td>
+          <td class="col_<?php print $value['hos_id'];?>">
+            <?php calculate_sub($db, $value['hos_id'], 1, 15, 14); ?>
+          </td>
+          <?php
+        }
+      }
+      ?>
+    </tr>
+
+    <tr>
+      <td style="text-align: left;">
+        3. Retained foley catheter
+      </td>
+      <?php
+      if($resultHospital){
+        foreach($resultHospital as $value){
+          ?>
+          <td class="col_<?php print $value['hos_id'];?>">
+            -
+          </td>
+          <td class="col_<?php print $value['hos_id'];?>">
+            <?php calculate_sub($db, $value['hos_id'], 1, 15, 14); ?>
+          </td>
+          <?php
+        }
+      }
+      ?>
+    </tr>
+
+    <tr>
+      <td style="text-align: left;">
+        4. Monitoring urine output
+      </td>
+      <?php
+      if($resultHospital){
+        foreach($resultHospital as $value){
+          ?>
+          <td class="col_<?php print $value['hos_id'];?>">
+            -
+          </td>
+          <td class="col_<?php print $value['hos_id'];?>">
+            <?php calculate_sub($db, $value['hos_id'], 1, 15, 14); ?>
+          </td>
+          <?php
+        }
+      }
+      ?>
+    </tr>
+
+    <tr>
+      <td style="text-align: left;">
+        5. Typing screening or cross-matching blood
+      </td>
+      <?php
+      if($resultHospital){
+        foreach($resultHospital as $value){
+          ?>
+          <td class="col_<?php print $value['hos_id'];?>">
+            -
+          </td>
+          <td class="col_<?php print $value['hos_id'];?>">
+            <?php calculate_sub($db, $value['hos_id'], 1, 15, 14); ?>
+          </td>
+          <?php
+        }
+      }
+      ?>
+    </tr>
+
+    <tr>
+      <td style="text-align: left;">
+        6. If blood loss >1500 ml. Blood transmission within 60 min.
+      </td>
+      <?php
+      if($resultHospital){
+        foreach($resultHospital as $value){
+          ?>
+          <td class="col_<?php print $value['hos_id'];?>">
+            -
+          </td>
+          <td class="col_<?php print $value['hos_id'];?>">
+            <?php calculate_sub($db, $value['hos_id'], 1, 15, 14); ?>
+          </td>
+          <?php
+        }
+      }
+      ?>
+    </tr>
+
+    <tr>
+      <td colspan="<?php print sizeof($resultHospital)+100; ?>" style="text-align: left; background: #f3f3f3;">
+        <strong>Cause of PPH</strong>
+      </td>
+    </tr>
+
+    <tr>
+      <td style="text-align: left;">
+        7. Uterine atony
       </td>
       <?php
       if($resultHospital){
@@ -85,7 +196,7 @@ $resultHospital = $db->select($strSQL,false,true);
 
     <tr>
       <td style="text-align: left; padding-left: 30px;">
-        2.1 Retained foley catheter
+        7.1 Uterine massage
       </td>
       <?php
       if($resultHospital){
@@ -105,7 +216,7 @@ $resultHospital = $db->select($strSQL,false,true);
 
     <tr>
       <td style="text-align: left; padding-left: 30px;">
-        2.1 Retained foley catheter
+        7.2 Oxytocin 20 units in Saline 1000 ml. or 10 units IM
       </td>
       <?php
       if($resultHospital){
@@ -125,7 +236,7 @@ $resultHospital = $db->select($strSQL,false,true);
 
     <tr>
       <td style="text-align: left; padding-left: 30px;">
-        2.2 Monitoring urine output
+        7.3 Methergine 0.2 mg IV slowly in women without hypertension when oxytocin failed
       </td>
       <?php
       if($resultHospital){
@@ -144,8 +255,8 @@ $resultHospital = $db->select($strSQL,false,true);
     </tr>
 
     <tr>
-      <td style="text-align: left; padding-left: 60px;">
-        2.2.1 Urine more than 0.5 ml. per kg. per hour
+      <td style="text-align: left; padding-left: 30px;">
+        7.4 Misoprostol 800 ug subligual when oxytocin failed
       </td>
       <?php
       if($resultHospital){
@@ -155,7 +266,7 @@ $resultHospital = $db->select($strSQL,false,true);
             -
           </td>
           <td class="col_<?php print $value['hos_id'];?>">
-            <?php calculate_sub($db, $value['hos_id'], 1, 19, 18); ?>
+            <?php calculate_sub($db, $value['hos_id'], 1, 18, 15); ?>
           </td>
           <?php
         }
@@ -165,7 +276,47 @@ $resultHospital = $db->select($strSQL,false,true);
 
     <tr>
       <td style="text-align: left; padding-left: 30px;">
-        2.3 Monitoring deep tendon reflex
+        7.5 Intravenous prostaglandin when oxytocin failed
+      </td>
+      <?php
+      if($resultHospital){
+        foreach($resultHospital as $value){
+          ?>
+          <td class="col_<?php print $value['hos_id'];?>">
+            -
+          </td>
+          <td class="col_<?php print $value['hos_id'];?>">
+            <?php calculate_sub($db, $value['hos_id'], 1, 18, 15); ?>
+          </td>
+          <?php
+        }
+      }
+      ?>
+    </tr>
+
+    <tr>
+      <td style="text-align: left;">
+        8. Retained placenta
+      </td>
+      <?php
+      if($resultHospital){
+        foreach($resultHospital as $value){
+          ?>
+          <td class="col_<?php print $value['hos_id'];?>">
+            -
+          </td>
+          <td class="col_<?php print $value['hos_id'];?>">
+            <?php calculate_sub($db, $value['hos_id'], 1, 15, 14); ?>
+          </td>
+          <?php
+        }
+      }
+      ?>
+    </tr>
+
+    <tr>
+      <td style="text-align: left; padding-left: 30px;">
+        8.1 Removal of placenta
       </td>
       <?php
       if($resultHospital){
@@ -184,28 +335,8 @@ $resultHospital = $db->select($strSQL,false,true);
     </tr>
 
     <tr>
-      <td style="text-align: left; padding-left: 60px;">
-        2.3.1 Absence tendon reflex
-      </td>
-      <?php
-      if($resultHospital){
-        foreach($resultHospital as $value){
-          ?>
-          <td class="col_<?php print $value['hos_id'];?>">
-            -
-          </td>
-          <td class="col_<?php print $value['hos_id'];?>">
-            <?php calculate_sub($db, $value['hos_id'], 1, 21, 20); ?>
-          </td>
-          <?php
-        }
-      }
-      ?>
-    </tr>
-
-    <tr>
       <td style="text-align: left; padding-left: 30px;">
-        2.4 Monitoring respiratory rate
+        8.2 Removal of placenta under general anesthesia
       </td>
       <?php
       if($resultHospital){
@@ -224,57 +355,18 @@ $resultHospital = $db->select($strSQL,false,true);
     </tr>
 
     <tr>
-      <td style="text-align: left; padding-left: 60px;">
-        2.4.1 Respiratory rate <14 per min
-      </td>
-      <?php
-      if($resultHospital){
-        foreach($resultHospital as $value){
-          ?>
-          <td class="col_<?php print $value['hos_id'];?>" style="background: #f3f3f3;">
-
-          </td>
-          <td class="col_<?php print $value['hos_id'];?>">
-            <?php calculate_sub($db, $value['hos_id'], 1, 23, 22); ?>
-          </td>
-          <?php
-        }
-      }
-      ?>
-    </tr>
-
-    <tr>
-      <td style="text-align: left;">
-        3. Antihypertensive drugs given when BP 160/110 mm Hg or more
-      </td>
-      <?php
-      if($resultHospital){
-        foreach($resultHospital as $value){
-          ?>
-          <td style="width: 50px;" class="col_<?php print $value['hos_id'];?>">
-            <?php calculate($db, $value['hos_id'], 1, 24); ?>
-          </td>
-          <td style="width: 50px; background: #f3f3f3;" class="col_<?php print $value['hos_id'];?>">
-
-          </td>
-          <?php
-        }
-      }
-      ?>
-    </tr>
-
-    <tr>
-      <td style="text-align: left;">
-        4. Fetal monitoring
+      <td style="text-align: left; padding-left: 30px;">
+        8.3 Oxytocin administration for good uterine contraction after removal of placenta
       </td>
       <?php
       if($resultHospital){
         foreach($resultHospital as $value){
           ?>
           <td class="col_<?php print $value['hos_id'];?>">
-            <?php calculate($db, $value['hos_id'], 1, 25); ?>
+            -
           </td>
-          <td class="col_<?php print $value['hos_id'];?>"  style="background: #f3f3f3;">
+          <td class="col_<?php print $value['hos_id'];?>">
+            <?php calculate_sub($db, $value['hos_id'], 1, 22, 15); ?>
           </td>
           <?php
         }
@@ -284,16 +376,17 @@ $resultHospital = $db->select($strSQL,false,true);
 
     <tr>
       <td style="text-align: left; padding-left: 30px;">
-        4.1 NST
+        8.4 Antibiotic prophylaxis in removal of placenta
       </td>
       <?php
       if($resultHospital){
         foreach($resultHospital as $value){
           ?>
-          <td class="col_<?php print $value['hos_id'];?>"  style="background: #f3f3f3;">
+          <td class="col_<?php print $value['hos_id'];?>">
+            -
           </td>
           <td class="col_<?php print $value['hos_id'];?>">
-            <?php calculate_sub($db, $value['hos_id'], 1, 26, 25); ?>
+            <?php calculate_sub($db, $value['hos_id'], 1, 22, 15); ?>
           </td>
           <?php
         }
@@ -303,16 +396,17 @@ $resultHospital = $db->select($strSQL,false,true);
 
     <tr>
       <td style="text-align: left; padding-left: 30px;">
-        4.2 US
+        8.5 Retained piece of placenta
       </td>
       <?php
       if($resultHospital){
         foreach($resultHospital as $value){
           ?>
-          <td class="col_<?php print $value['hos_id'];?>"  style="background: #f3f3f3;">
+          <td class="col_<?php print $value['hos_id'];?>">
+            -
           </td>
           <td class="col_<?php print $value['hos_id'];?>">
-            <?php calculate_sub($db, $value['hos_id'], 1, 27, 25); ?>
+            <?php calculate_sub($db, $value['hos_id'], 1, 22, 15); ?>
           </td>
           <?php
         }
@@ -322,23 +416,26 @@ $resultHospital = $db->select($strSQL,false,true);
 
     <tr>
       <td style="text-align: left; padding-left: 30px;">
-        4.3 Continuous fetal monitoring if uterine contraction
+        8.6 Vaginal or cervical injuries
       </td>
       <?php
       if($resultHospital){
         foreach($resultHospital as $value){
           ?>
-          <td class="col_<?php print $value['hos_id'];?>" style="background: #f3f3f3;">
-
+          <td class="col_<?php print $value['hos_id'];?>">
+            -
           </td>
           <td class="col_<?php print $value['hos_id'];?>">
-            <?php calculate_sub($db, $value['hos_id'], 1, 28, 25); ?>
+            <?php calculate_sub($db, $value['hos_id'], 1, 22, 15); ?>
           </td>
           <?php
         }
       }
       ?>
     </tr>
+
+
+
   </tbody>
 </table>
 <?php

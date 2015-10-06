@@ -129,11 +129,10 @@ include "function/function.inc.php";
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a href="index.php">
-            <div style="padding-top: 10px; font-size: 1.3em; text-align:center; color: #06c; padding-left: 120px;">
-            <strong>SIMANH </strong>  <font color="#888" style="font-size: 1.0em; font-weight: light;">Thailand</font>
-            </div>
-          </a>
+          <a class="logo" href="index.php">SIMANH</a>
+          <!-- <form class="navbar-form form-inline col-lg-2 hidden-xs">
+            <input class="form-control" placeholder="Search" type="text">
+          </form> -->
         </div>
         <div class="container-fluid main-nav clearfix">
           <div class="nav-collapse">
@@ -180,13 +179,56 @@ include "function/function.inc.php";
         </div>
       </div>
       <!-- End Navigation -->
-      <?php
-      $strSQL = "SELECT * FROM tb_hospital WHERE status = 1";
-      $resultHospital = $db->select($strSQL,false,true);
-      ?>
       <div class="container-fluid main-content">
-
-        <div class="col-lg-12">
+        <div class="col-lg-3">
+          <div class="page-title">
+            <h1>
+              Filter
+            </h1>
+          </div>
+          <div class="row">
+            <div class="widget-container fluid-height">
+              <div class="widget-content">
+                <div class="panel-group" id="accordion">
+                  <div class="panel">
+                    <div class="panel-heading">
+                      <div class="panel-title">
+                        <a class="accordion-toggle" data-parent="#accordion" data-toggle="collapse" href="#collapseTwo">
+                          <div class="caret pull-right"></div>
+                          <span>Institute / Hospital</span></a>
+                      </div>
+                    </div>
+                    <div class="panel-collapse collapse in" id="collapseTwo">
+                      <div class="panel-body">
+                        <?php
+                        $strSQL = "SELECT * FROM tb_hospital WHERE status = 1";
+                        $resultHospital = $db->select($strSQL,false,true);
+                        if($resultHospital){
+                          foreach($resultHospital as $value){
+                            ?>
+                            <label class="checkbox">
+                              <input type="checkbox" value="<?php print $value['hos_id']; ?>" class="hos_checkbox" checked="">
+                              <span>
+                                <?php
+                                // $arr = explode(' ',$value['hos_name_en']);
+                                print $value['hos_name_en'];
+                                // print $arr[0];
+                                ?></span>
+                            </label>
+                            <?php
+                          }
+                        }
+                        ?>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End row -->
+        </div>
+        <div class="col-lg-9">
           <div class="container-fluid main-content">
             <!-- Statistics -->
             <div class="page-title">
@@ -230,24 +272,22 @@ include "function/function.inc.php";
                               foreach($resultHospital as $value){
                                 ?>
                                 <td>
-                                  <a href="result.php?hos_id=<?php print $value['hos_id'];?>">
-                                    <?php
-                                    print adm($db, $value['hos_id']);
-                                    ?>
-                                  </a>
+                                  <?php
+                                   //adm($db, $value['hos_id']);
+                                  // $summ += adm2($db, $value['hos_id']);
+                                  print adm($db, $value['hos_id']);
+                                  ?>
                                 </td>
                                 <?php
                               }
                             }
                             ?>
                             <td style="color: #06c;">
-                              <a href="result_all.php">
-                                <strong>
-                                  <?php
-                                    print summary($db, 1);
-                                  ?>
-                                </strong>
-                              </a>
+                              <?php
+                              // countaTotal($db, 0,1);
+                              //print $summ;
+                              countaTotal($db, 0,1);
+                              ?>
                             </td>
                           </tr>
                           <tr>
@@ -255,28 +295,25 @@ include "function/function.inc.php";
                               2. Total delivery (case)
                             </td>
                             <?php
+                            $summ = 0;
                             if($resultHospital){
                               foreach($resultHospital as $value){
                                 ?>
                                 <td>
-                                  <a href="result.php?hos_id=<?php print $value['hos_id'];?>">
                                   <?php
-                                    print del($db, $value['hos_id']);
+                                  del($db, $value['hos_id']);
+                                  $summ += del2($db, $value['hos_id']);
                                   ?>
-                                  </a>
                                 </td>
                                 <?php
                               }
                             }
                             ?>
                             <td style="color: #06c;">
-                              <a href="result_all.php">
-                                <strong>
-                                  <?php
-                                    print summary($db, 2);
-                                  ?>
-                                </strong>
-                              </a>
+                              <?php
+                                //countaTotal($db, 0,2);
+                                print $summ;
+                              ?>
                             </td>
                           </tr>
                           <tr>
@@ -288,22 +325,14 @@ include "function/function.inc.php";
                               foreach($resultHospital as $value){
                                 ?>
                                 <td>
-                                  <a href="result.php?hos_id=<?php print $value['hos_id'];?>">
-                                    <?php  print birth($db, $value['hos_id']); ?>
-                                  </a>
+                                  <?php  birth($db, $value['hos_id']); ?>
                                 </td>
                                 <?php
                               }
                             }
                             ?>
                             <td style="color: #06c;">
-                              <a href="result_all.php">
-                                <strong>
-                                  <?php
-                                  print summary($db, 3);
-                                  ?>
-                                </strong>
-                              </a>
+                              <?php countaTotal($db, 0,3); ?>
                             </td>
                           </tr>
                           <tr>
@@ -315,22 +344,14 @@ include "function/function.inc.php";
                               foreach($resultHospital as $value){
                                 ?>
                                 <td>
-                                  <a href="result.php?hos_id=<?php print $value['hos_id'];?>">
-                                    <?php  print lbirth($db, $value['hos_id']); ?>
-                                  </a>
+                                  <?php  lbirth($db, $value['hos_id']); ?>
                                 </td>
                                 <?php
                               }
                             }
                             ?>
                             <td style="color: #06c;">
-                              <a href="result_all.php">
-                                <strong>
-                                  <?php
-                                    print summary($db, 4);
-                                    ?>
-                                </strong>
-                              </a>
+                              <?php countaTotal($db, 0, 4); ?>
                             </td>
                           </tr>
                           <tr>
@@ -338,26 +359,18 @@ include "function/function.inc.php";
                               5. Refer in
                             </td>
                             <?php
-                            $sumreferin = 0;
                             if($resultHospital){
                               foreach($resultHospital as $value){
                                 ?>
                                 <td>
-                                  <a href="result.php?hos_id=<?php print $value['hos_id'];?>">
-                                    <?php
-                                      $sumreferin += referin($db, $value['hos_id']);
-                                      print referin($db, $value['hos_id']);
-                                    ?>
-                                  </a>
+                                  <?php  referin($db, $value['hos_id']); ?>
                                 </td>
                                 <?php
                               }
                             }
                             ?>
                             <td style="color: #06c;">
-                              <a href="result_all.php">
-                                <strong><?php print $sumreferin; ?></strong>
-                              </a>
+                              <?php getRefer($db, 'in'); ?>
                             </td>
                           </tr>
                           <tr>
@@ -365,26 +378,18 @@ include "function/function.inc.php";
                               6. Refer out
                             </td>
                             <?php
-                            $sumreferout = 0;
                             if($resultHospital){
                               foreach($resultHospital as $value){
                                 ?>
                                 <td>
-                                  <a href="result.php?hos_id=<?php print $value['hos_id'];?>">
-                                    <?php
-                                      $sumreferout += referout($db, $value['hos_id']);
-                                      print referout($db, $value['hos_id']);
-                                    ?>
-                                  </a>
+                                  <?php  referout($db, $value['hos_id']); ?>
                                 </td>
                                 <?php
                               }
                             }
                             ?>
                             <td style="color: #06c;">
-                              <a href="result_all.php">
-                                <strong><?php print $sumreferout; ?></strong>
-                              </a>
+                              <?php getRefer($db, 'out'); ?>
                             </td>
                           </tr>
                         </tbody>
@@ -642,6 +647,60 @@ include "function/function.inc.php";
 
 
     </div>
-
+    <div class="style-selector">
+      <div class="style-selector-container">
+        <h2>
+          Layout Style
+        </h2>
+        <select name="layout"><option value="fluid">Fluid</option><option value="boxed">Boxed</option></select>
+        <h2>
+          Navigation Style
+        </h2>
+        <select name="nav"><option value="top">Top</option><option value="left">Left</option></select>
+        <h2>
+          Color Options
+        </h2>
+        <ul class="color-options clearfix">
+          <li>
+            <a class="blue" href="javascript:chooseStyle('none', 30)"></a>
+          </li>
+          <li>
+            <a class="green" href="javascript:chooseStyle('green-theme', 30)"></a>
+          </li>
+          <li>
+            <a class="orange" href="javascript:chooseStyle('orange-theme', 30)"></a>
+          </li>
+          <li>
+            <a class="magenta" href="javascript:chooseStyle('magenta-theme', 30)"></a>
+          </li>
+          <li>
+            <a class="gray" href="javascript:chooseStyle('gray-theme', 30)"></a>
+          </li>
+        </ul>
+        <h2>
+          Background Patterns
+        </h2>
+        <ul class="pattern-options clearfix">
+          <li>
+            <a class="active" href="#" id="bg-1"></a>
+          </li>
+          <li>
+            <a href="#" id="bg-2"></a>
+          </li>
+          <li>
+            <a href="#" id="bg-3"></a>
+          </li>
+          <li>
+            <a href="#" id="bg-4"></a>
+          </li>
+          <li>
+            <a href="#" id="bg-5"></a>
+          </li>
+        </ul>
+        <div class="style-toggle closed">
+          <span aria-hidden="true" class="se7en-gear"></span>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
